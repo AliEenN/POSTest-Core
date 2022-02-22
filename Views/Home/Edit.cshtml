@@ -1,0 +1,62 @@
+﻿@model Product
+
+<form asp-action="Edit" method="post" enctype="multipart/form-data">
+
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group">
+                    <label asp-for="Name">Item Name</label>
+                    <input type="text" asp-for="Name" class="form-control" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group">
+                    <label asp-for="Price">Price</label>
+                    <input asp-for="Price" class="form-control" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group">
+                    <label asp-for="Picture">Picture</label>
+                    <input type="file" asp-for="Picture" palceholder="Select image" class="form-control" />
+                </div>
+            </div>
+        </div>
+
+        @foreach (var size in Model.Sizes)
+        {
+            <div class="row" for="sizes">
+                <div class="col-5">
+                    <div class="form-group">
+                        <label>Size Name</label>
+                        <input type="text" asp-for="@size.Name" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-5">
+                    <div class="form-group">
+                        <label>Size Price</label>
+                        <input asp-for="@size.Price" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="form-group" style="margin-top: 27%;">
+                        <a href="Javascript:void(0);" class="btn btn-success add-size">Add</a>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            Close
+        </button>
+        <button type="submit" id="btnSaveHours" class="btn btn-primary" title="Save">Save</button>
+    </div>
+
+</form>

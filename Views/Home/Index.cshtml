@@ -1,0 +1,161 @@
+﻿@model IEnumerable<ProductVM>
+
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="page-header d-md-flex justify-content-between">
+    <div>
+        <h3>Users</h3>
+        <nav aria-label="breadcrumb" class="d-flex align-items-start">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a asp-action="index" asp-controller="home">Items Management</a>
+                </li>
+            </ol>
+        </nav>
+    </div>
+    <div class="mt-2 mt-md-0">
+        <a href="#" class="btn btn-success" data-toggle="modal" data-target="#mdlNew" title="Add new item">Add new item</a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="user-list" class="table table-lg">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Price</th>
+                                <th>Sizes</th>
+                                <th class="text-right">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var product in Model)
+                            {
+                                <tr>
+                                    <td>@product.Id</td>
+                                    <td>
+                                        <a href="#">
+                                            <figure class="avatar avatar-sm mr-2">
+                                                @*<img src="../../assets/media/image/user/man_avatar3.jpg"
+        class="rounded-circle" alt="avatar">*@
+                                                <div class="img-fluid rounded-circle imgCustom3" style="background-image: url(data:image\/*;base64,@(Convert.ToBase64String(product.Picture)))"></div>
+                                            </figure>
+                                            @product.Name
+                                        </a>
+                                    </td>
+                                    <td>@product.Price BHD</td>
+                                    <td>
+                                        @product.Size
+                                    </td>
+                                    <td class="text-right">
+                                        <div class="dropdown">
+                                            <a href="#" data-toggle="dropdown"
+                                               class="btn btn-floating"
+                                               aria-haspopup="true" aria-expanded="false">
+                                                <i class="ti-more-alt"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a asp-action="Edit" asp-route-id="@product.Id" class="dropdown-item text-success">Edit</a>
+                                                <a asp-action="Delete" asp-route-id="@product.Id" class="dropdown-item text-danger">Delete</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                            @*<tr>
+                                    <td>2</td>
+                                    <td>
+                                        <a href="#">
+                                            <figure class="avatar avatar-sm mr-2">
+                                                <img src="../../assets/media/image/user/man_avatar3.jpg"
+                                                     class="rounded-circle" alt="avatar">
+                                            </figure>
+                                            Beef Burger
+                                        </a>
+                                    </td>
+                                    <td>1.3 BHD</td>
+                                    <td>
+                                        3
+                                    </td>
+                                    <td class="text-right">
+                                        <div class="dropdown">
+                                            <a href="#" data-toggle="dropdown"
+                                               class="btn btn-floating"
+                                               aria-haspopup="true" aria-expanded="false">
+                                                <i class="ti-more-alt"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a href="#" class="dropdown-item text-success">Edit</a>
+                                                <a href="#" class="dropdown-item text-danger">Delete</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>
+                                        <a href="#">
+                                            <figure class="avatar avatar-sm mr-2">
+                                                <img src="../../assets/media/image/user/man_avatar3.jpg"
+                                                     class="rounded-circle" alt="avatar">
+                                            </figure>
+                                            Chicken Burger
+                                        </a>
+                                    </td>
+                                    <td>1.6 BHD</td>
+                                    <td>
+                                        0
+                                    </td>
+                                    <td class="text-right">
+                                        <div class="dropdown">
+                                            <a href="#" data-toggle="dropdown"
+                                               class="btn btn-floating"
+                                               aria-haspopup="true" aria-expanded="false">
+                                                <i class="ti-more-alt"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a href="#" class="dropdown-item text-success">Edit</a>
+                                                <a href="#" class="dropdown-item text-danger">Delete</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>*@
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<partial name="_CreateView" model="new ProductCreateVM()" />
+
+
+@section Scripts
+{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+
+    <script type="text/javascript">
+        $(document).on('click', '.add-size', function () {
+            var size = $('div[for="sizes"]:first').clone();
+
+            size.find('.add-size').addClass('remove-size');
+            size.find('.add-size').addClass('btn-danger');
+            size.find('.add-size').text('Remove');
+            size.find('.add-size').removeClass('add-size');
+            $('#frmItem .modal-body').append(size);
+        });
+
+        $(document).on('click', '.remove-size', function () {
+            $(this).closest('div[for="sizes"]').remove();
+        });
+    </script>
+}

@@ -1,0 +1,73 @@
+﻿@model ProductCreateVM
+
+<form asp-action="Create" method="post" enctype="multipart/form-data">
+
+    <div id="mdlNew" class="modal fade modal-item" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title">Add new item</h6>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <i class="ti-close"></i>
+                    </button>
+                </div>
+                <div id="frmItem">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label asp-for="Name">Item Name</label>
+                                    <input type="text" asp-for="Name" class="form-control" />
+                                    <span asp-validation-for="Name"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label asp-for="Price">Price</label>
+                                    <input asp-for="Price" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label asp-for="Picture">Picture</label>
+                                    <input type="file" asp-for="Picture" palceholder="Select image" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row" for="sizes">
+                            <div class="col-5">
+                                <div class="form-group">
+                                    <label>Size Name</label>
+                                    <input type="text" asp-for="SizeName" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-5">
+                                <div class="form-group">
+                                    <label>Size Price</label>
+                                    <input asp-for="SizePrice" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="form-group" style="margin-top: 27%;">
+                                    <a href="Javascript:void(0);" class="btn btn-success add-size">Add</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                            Close
+                        </button>
+                        <button type="submit" id="btnSaveHours" class="btn btn-primary" title="Save">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
